@@ -196,6 +196,16 @@
       font-weight: 800;
       color: #000000;
       font-size: 13.5px;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(15, 81, 50, 0.2);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .map .map-button:hover,
+    .map .map-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(15, 81, 50, 0.28);
+      background: #0a3c25;
     }
 
     .map .map-button {
