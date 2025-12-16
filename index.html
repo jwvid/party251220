@@ -4,17 +4,107 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>놀아볼까?</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Heavy.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
+      font-weight: 100;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
+      font-weight: 200;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+      font-weight: 300;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
     :root {
-      --deep-red: #7a1b1b;
-      --wine: #4a0f1a;
-      --gold: #f3d9a4;
-      --cream: #fff7eb;
-      --card: rgba(255, 255, 255, 0.08);
-      --border: rgba(255, 255, 255, 0.12);
+      --berry: #b2004b;
+      --forest: #0f5132;
+      --rose: #ffe5ec;
+      --paper: #fff9f5;
+      --ink: #1f1a26;
+      --muted: #5f5368;
+      --border: #f1e4da;
+      --shadow: 0 14px 34px rgba(31, 26, 38, 0.08);
       color-scheme: only light;
     }
 
@@ -25,26 +115,35 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(120% 120% at 20% 20%, #8f2a2a 0%, #300b12 45%, #1a0a10 100%);
-      font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-      color: var(--cream);
+      background: radial-gradient(120% 120% at 15% 20%, #fff2f6 0%, #fef9f4 45%, #ffffff 100%);
+      font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
       display: flex;
       justify-content: center;
-      padding: 24px 18px 32px;
+      padding: 28px 18px 40px;
     }
 
     .page {
-      width: min(900px, 100%);
+      width: min(860px, 100%);
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
     }
 
     .hero {
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      padding: 10px 8px 6px;
     }
 
     .tagline {
@@ -54,154 +153,143 @@
       gap: 8px;
       padding: 8px 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
-      color: var(--gold);
+      background: rgba(178, 0, 75, 0.08);
+      border: 1px solid rgba(178, 0, 75, 0.15);
+      color: var(--forest);
       font-size: 14px;
       letter-spacing: 0.4px;
+      font-weight: 600;
     }
 
     h1 {
-      font-family: 'Playfair Display', 'Times New Roman', serif;
-      font-size: clamp(38px, 8vw, 64px);
-      color: var(--gold);
+      font-family: 'SeoulNotice', 'Times New Roman', serif;
+      font-size: clamp(42px, 9vw, 70px);
+      color: var(--berry);
       margin: 0;
-      letter-spacing: 1px;
+      letter-spacing: 1.4px;
+      text-shadow: 0 8px 20px rgba(178, 0, 75, 0.12);
     }
 
     .subhead {
       margin: 0;
       font-size: 16px;
-      color: rgba(255, 247, 235, 0.86);
-      line-height: 1.6;
+      color: var(--muted);
+      line-height: 1.7;
     }
 
-    .grid {
-      background: var(--card);
-      border: 1px solid var(--border);
+    .visual {
       border-radius: 18px;
-      padding: 16px;
-      backdrop-filter: blur(6px);
-      display: grid;
-      grid-template-columns: repeat(2, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .grid figure {
-      margin: 0;
-      border-radius: 14px;
       overflow: hidden;
       position: relative;
       border: 1px solid var(--border);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      background: #12070c;
+      box-shadow: var(--shadow);
+      background: linear-gradient(120deg, #ffe5ec, #f9f0ff);
     }
 
-    .grid img {
+    .visual img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
-      aspect-ratio: 3 / 4;
-      transition: transform 0.35s ease;
-    }
-
-    .grid figure:hover img {
-      transform: scale(1.02);
+      object-fit: cover;
+      aspect-ratio: 4 / 5;
     }
 
     .info-card {
-      background: rgba(255, 247, 235, 0.06);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px 16px;
       display: grid;
-      gap: 12px;
+      gap: 14px;
       line-height: 1.6;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
     }
 
     .label {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
-      background: rgba(243, 217, 164, 0.12);
+      padding: 6px 12px;
+      background: rgba(15, 81, 50, 0.08);
       border-radius: 999px;
-      color: var(--gold);
-      font-weight: 600;
+      color: var(--forest);
+      font-weight: 700;
       font-size: 13px;
       letter-spacing: 0.2px;
-      border: 1px solid rgba(243, 217, 164, 0.35);
+      border: 1px solid rgba(15, 81, 50, 0.15);
       width: fit-content;
     }
 
     .info-main {
       display: grid;
-      gap: 8px;
+      gap: 6px;
     }
 
     .info-main .title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--cream);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--ink);
     }
 
     .info-main .note {
-      color: rgba(255, 247, 235, 0.85);
+      color: var(--muted);
       font-size: 15px;
     }
 
     .schedule {
       display: grid;
-      gap: 8px;
+      gap: 10px;
     }
 
     .schedule-item {
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(243, 217, 164, 0.08);
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: linear-gradient(120deg, rgba(178, 0, 75, 0.06), rgba(255, 229, 236, 0.5));
       border: 1px solid var(--border);
-      color: var(--cream);
+      color: var(--ink);
       font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(31, 26, 38, 0.06);
     }
 
     .footer-address {
       font-size: 15px;
-      color: rgba(255, 247, 235, 0.82);
+      color: var(--muted);
       line-height: 1.6;
+    }
+
+    .map {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
     }
 
     @media (max-width: 520px) {
       body {
-        padding: 20px 14px 28px;
+        padding: 22px 14px 32px;
       }
 
-      .grid {
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-        padding: 14px;
+      .card {
+        padding: 18px 16px;
       }
     }
   </style>
 </head>
 <body>
   <main class="page" aria-labelledby="page-title">
-    <section class="hero">
+    <section class="card hero">
       <span class="tagline">크리스마스 로맨틱 파티</span>
       <h1 id="page-title">놀아볼까?</h1>
       <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
     </section>
 
-    <section class="grid" aria-label="파티 미리보기 사진">
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="촛불과 장식으로 꾸민 겨울 파티 테이블"></figure>
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="따뜻한 조명 아래 크리스마스 데커레이션"></figure>
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="와인과 꽃이 있는 연말 파티 테이블"></figure>
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="겨울 파티를 위한 로맨틱한 무드 라이트"></figure>
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="크리스마스 장식이 놓인 테이블 세팅"></figure>
-      <figure><img src="./photo-1765651998297-c5f862ac0a53.avif" alt="따뜻한 색감의 파티 캔들 연출"></figure>
+    <section class="visual card" aria-label="파티 미리보기 사진">
+      <img src="./photo-1765651998297-c5f862ac0a53.avif" alt="촛불과 장식으로 꾸민 겨울 파티 테이블">
     </section>
 
-    <section class="info-card" aria-label="행사 정보">
+    <section class="card info-card" aria-label="행사 정보">
       <span class="label">When &amp; Where</span>
       <div class="info-main">
         <div class="title">2025년 12월 20일 토요일 · 오후 6시 ~ 11시</div>
@@ -215,9 +303,19 @@
       </div>
 
       <div class="footer-address">
-        서울시 어디든지 어울리는 로맨틱 가든 라운지 (예시 주소)<br>
-        지하철 ○○역 3번 출구 도보 5분 · 주차 가능
+        재즈257 · 인천 송도동 로맨틱 재즈 라운지<br>
+        지하철 송도역 3번 출구 도보 5분 · 주차 가능
       </div>
+    </section>
+
+    <section class="card map" aria-label="재즈257 위치 지도">
+      <iframe
+        src="https://www.google.com/maps?q=%EC%9E%AC%EC%A6%88257%20%EC%86%A1%EB%8F%84&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="재즈257 지도">
+      </iframe>
     </section>
   </main>
 </body>
