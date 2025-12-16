@@ -517,7 +517,7 @@
         confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
 
         confetti.style.animationDelay = `${Math.random() * 0.35}s`;
-        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.825}s`;
+        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.75}s`;
 
         confetti.addEventListener('animationend', () => confetti.remove());
         document.body.appendChild(confetti);
@@ -529,11 +529,11 @@
     }
 
     function computeConfettiVector(side = 'left') {
-      const baseDx = side === 'left' ? 56 + Math.random() * 18 : -(56 + Math.random() * 18);
-      const baseDy = -44 - Math.random() * 20;
+      const baseDx = side === 'left' ? 50 + Math.random() * 12 : -(50 + Math.random() * 12);
+      const baseDy = -38 - Math.random() * 16;
       const baseAngle = Math.atan2(baseDy, baseDx);
-      const spreadAngle = (Math.random() * 70 - 35) * (Math.PI / 180);
-      const magnitude = Math.hypot(baseDx, baseDy) * (0.94 + Math.random() * 0.22);
+      const spreadAngle = (Math.random() * 40 - 20) * (Math.PI / 180);
+      const magnitude = Math.hypot(baseDx, baseDy) * (0.92 + Math.random() * 0.16);
       const finalAngle = baseAngle + spreadAngle;
 
       return {
