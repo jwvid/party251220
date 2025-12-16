@@ -92,13 +92,24 @@
       padding: 10px 8px 6px;
     }
 
+    .hero-title {
+      margin: 6px 0 0;
+      font-family: 'SeoulNotice', 'Times New Roman', serif;
+      font-size: clamp(44px, 8vw, 78px);
+      color: var(--berry);
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      text-align: center;
+      text-shadow: 0 8px 20px rgba(178, 0, 75, 0.14);
+    }
+
     h1 {
       font-family: 'SeoulNotice', 'Times New Roman', serif;
-      font-size: clamp(42px, 9vw, 70px);
+      font-size: clamp(38px, 8.6vw, 66px);
       color: var(--berry);
       font-weight: 900;
       margin: 0;
-      letter-spacing: 1.4px;
+      letter-spacing: 1.2px;
       text-shadow: 0 8px 20px rgba(178, 0, 75, 0.12);
     }
 
@@ -138,14 +149,14 @@
     }
 
     .info-main .title {
-      font-size: 21px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 800;
       color: var(--ink);
     }
 
     .info-main .note {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .schedule {
@@ -159,13 +170,13 @@
       background: linear-gradient(120deg, rgba(178, 0, 75, 0.06), rgba(255, 229, 236, 0.5));
       border: 1px solid var(--border);
       color: var(--ink);
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 14.5px;
+      font-weight: 700;
       box-shadow: 0 10px 20px rgba(31, 26, 38, 0.06);
     }
 
     .footer-address {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--muted);
       line-height: 1.6;
     }
@@ -181,7 +192,7 @@
     }
 
     .map .address-line {
-      font-weight: 700;
+      font-weight: 800;
       color: var(--forest);
       font-size: 15px;
     }
@@ -189,6 +200,8 @@
     .map .parking {
       font-size: 14px;
       color: var(--muted);
+      display: grid;
+      gap: 4px;
     }
 
     .map .parking a {
@@ -224,7 +237,7 @@
       position: fixed;
       bottom: -12px;
       font-size: 28px;
-      animation: confettiFly 1.4s ease-out forwards;
+      animation: confettiFly 1.6s cubic-bezier(0.18, 0.72, 0.28, 0.98) forwards;
       pointer-events: none;
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
       z-index: 12000;
@@ -238,9 +251,13 @@
       12% {
         opacity: 1;
       }
-      100% {
+      78% {
         opacity: 1;
         transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(1.05) rotate(var(--rot, 0deg));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(0) rotate(calc(var(--rot, 0deg) * 1.2));
       }
     }
 
@@ -282,6 +299,26 @@
       transform: translateY(10px);
       animation: riseIn 0.4s ease forwards;
       animation-delay: calc(var(--entry-delay) + 0.08s);
+    }
+
+    .section-kicker {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .parking-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
     }
 
     .info-card > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0.08s); }
@@ -414,6 +451,8 @@
   <div class="snowflake" style="left:90%; --drift:-10px; animation-duration:14s; animation-delay:8s;">❅</div>
   <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
+    <h1 class="hero-title">놀아볼까?</h1>
+    <p class="subhead" style="text-align:center; margin-top:4px; margin-bottom:4px; font-size:15.5px;">하지원&변아현의 연말파티 겸 결혼 피로연 파티에 초대합니다!</p>
     <section class="card hero visually-hidden">
       <h1 id="page-title">놀아볼까?</h1>
       <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
@@ -424,6 +463,7 @@
     </section>
 
     <section class="card info-card" aria-label="행사 정보">
+      <div class="section-kicker">🗓️ 일시와 타임 테이블</div>
       <div class="info-main">
         <div class="title">2025년 12월 20일 토요일 · 오후 6시 ~ 11시</div>
         <div class="note">* 식사가 제공됩니다.</div>
@@ -442,6 +482,7 @@
     </section>
 
     <section class="card map" aria-label="재즈257 위치 지도">
+      <div class="section-kicker">📍 오시는 길 및 주차 안내</div>
       <div class="address-line">인천 연수구 인천타워대로 257 아트포레 D동 201호 202호</div>
       <iframe
         src="https://www.google.com/maps?q=%EC%9E%AC%EC%A6%88257&output=embed"
@@ -451,8 +492,11 @@
         title="재즈257 구글 지도">
       </iframe>
       <div class="parking">
-        주차장 안내 : 재즈257이 위치한 아트포레 상가동 지하주차장을 이용하셔도 되고 (무료 4시간)
-        인근 공터(<a href="https://naver.me/5ZJXL9va" target="_blank" rel="noreferrer noopener">링크</a>) 무제한 주차 가능합니다.
+        <div class="parking-title">🅿️ 주차장 안내</div>
+        <div>
+          재즈257이 위치한 아트포레 상가동 지하주차장을 이용하셔도 되고 (무료 4시간)
+          인근 공터(<a href="https://naver.me/5ZJXL9va" target="_blank" rel="noreferrer noopener">링크</a>) 무제한 주차 가능합니다.
+        </div>
       </div>
     </section>
   </main>
@@ -461,20 +505,20 @@
 
     function launchConfetti(side = 'left', count = 14) {
       const startX = side === 'left' ? 4 : 96;
-      const dxBase = 42 + Math.random() * 14;
 
       for (let i = 0; i < count; i++) {
         const confetti = document.createElement('span');
         confetti.className = 'confetti';
         confetti.textContent = confettiTwemoji();
-        const randomOffset = Math.random() * 6;
+        const randomOffset = Math.random() * 14;
         confetti.style.left = `calc(${startX}vw ${side === 'left' ? '+' : '-'} ${randomOffset}vw)`;
-        confetti.style.setProperty('--dx', `${side === 'left' ? dxBase + Math.random() * 12 : -(dxBase + Math.random() * 12)}vw`);
-        confetti.style.setProperty('--dy', `${-34 - Math.random() * 16}vh`);
+        const { dx, dy } = computeConfettiVector(side);
+        confetti.style.setProperty('--dx', `${dx}vw`);
+        confetti.style.setProperty('--dy', `${dy}vh`);
         confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
 
         confetti.style.animationDelay = `${Math.random() * 0.35}s`;
-        confetti.style.animationDuration = `${1.2 + Math.random() * 0.5}s`;
+        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.95}s`;
 
         confetti.addEventListener('animationend', () => confetti.remove());
         document.body.appendChild(confetti);
@@ -485,15 +529,43 @@
       return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
     }
 
+    function computeConfettiVector(side = 'left') {
+      const baseDx = side === 'left' ? 62 + Math.random() * 20 : -(62 + Math.random() * 20);
+      const baseDy = -50 - Math.random() * 22;
+      const baseAngle = Math.atan2(baseDy, baseDx);
+      const spreadAngle = (Math.random() * 100 - 50) * (Math.PI / 180);
+      const magnitude = Math.hypot(baseDx, baseDy) * (0.96 + Math.random() * 0.24);
+      const finalAngle = baseAngle + spreadAngle;
+
+      return {
+        dx: parseFloat((Math.cos(finalAngle) * magnitude).toFixed(2)),
+        dy: parseFloat((Math.sin(finalAngle) * magnitude).toFixed(2)),
+      };
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.querySelector('.intro-overlay');
       if (!overlay) return;
 
-      overlay.addEventListener('animationend', (event) => {
-        if (event.animationName !== 'overlayExit') return;
+      const overlayStyles = getComputedStyle(overlay);
+      const duration = parseFloat(overlayStyles.animationDuration) || 0;
+      const delay = parseFloat(overlayStyles.animationDelay) || 0;
+      const leadTime = 1;
+      const scheduleMs = Math.max((delay + duration - leadTime) * 1000, 0);
 
+      let hasLaunched = false;
+      const triggerConfetti = () => {
+        if (hasLaunched) return;
+        hasLaunched = true;
         launchConfetti('left', 16);
         launchConfetti('right', 16);
+      };
+
+      setTimeout(triggerConfetti, scheduleMs);
+
+      overlay.addEventListener('animationend', (event) => {
+        if (event.animationName !== 'overlayExit') return;
+        triggerConfetti();
       });
     });
   </script>
