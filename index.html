@@ -45,6 +45,7 @@
       --muted: #5f5368;
       --border: #f1e4da;
       --shadow: 0 14px 34px rgba(31, 26, 38, 0.08);
+      --entry-delay: 3.7s;
       color-scheme: only light;
     }
 
@@ -70,6 +71,9 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      opacity: 0;
+      animation: contentReveal 0.6s ease forwards;
+      animation-delay: var(--entry-delay);
     }
 
     .card {
@@ -262,22 +266,22 @@
       animation: riseIn 0.4s ease forwards;
     }
 
-    .page > *:nth-child(1) { animation-delay: 0s; }
-    .page > *:nth-child(2) { animation-delay: 0.08s; }
-    .page > *:nth-child(3) { animation-delay: 0.16s; }
-    .page > *:nth-child(4) { animation-delay: 0.24s; }
+    .page > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0s); }
+    .page > *:nth-child(2) { animation-delay: calc(var(--entry-delay) + 0.08s); }
+    .page > *:nth-child(3) { animation-delay: calc(var(--entry-delay) + 0.16s); }
+    .page > *:nth-child(4) { animation-delay: calc(var(--entry-delay) + 0.24s); }
 
     .card > * {
       opacity: 0;
       transform: translateY(10px);
       animation: riseIn 0.4s ease forwards;
-      animation-delay: 0.08s;
+      animation-delay: calc(var(--entry-delay) + 0.08s);
     }
 
-    .info-card > *:nth-child(1) { animation-delay: 0.08s; }
-    .info-card > *:nth-child(2) { animation-delay: 0.14s; }
-    .info-card > *:nth-child(3) { animation-delay: 0.2s; }
-    .info-card > *:nth-child(4) { animation-delay: 0.26s; }
+    .info-card > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0.08s); }
+    .info-card > *:nth-child(2) { animation-delay: calc(var(--entry-delay) + 0.14s); }
+    .info-card > *:nth-child(3) { animation-delay: calc(var(--entry-delay) + 0.2s); }
+    .info-card > *:nth-child(4) { animation-delay: calc(var(--entry-delay) + 0.26s); }
 
     /* Snowflakes */
     .snowflake {
@@ -297,9 +301,83 @@
         transform: translateY(100vh);
       }
     }
+
+    /* Intro overlay */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: overlayExit 0.7s ease forwards;
+      animation-delay: 3s;
+      pointer-events: none;
+    }
+
+    .intro-title {
+      display: inline-flex;
+      gap: 6px;
+      font-family: 'SeoulNotice', 'Times New Roman', serif;
+      font-size: clamp(44px, 9vw, 76px);
+      color: var(--berry);
+      letter-spacing: 2px;
+    }
+
+    .intro-char {
+      opacity: 0;
+      transform: translateY(10px) scale(2.4);
+      animation: introChar 0.8s ease forwards;
+    }
+
+    .intro-char:nth-child(1) { animation-delay: 0s; }
+    .intro-char:nth-child(2) { animation-delay: 0.3s; }
+    .intro-char:nth-child(3) { animation-delay: 0.6s; }
+    .intro-char:nth-child(4) { animation-delay: 0.9s; }
+
+    @keyframes introChar {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(2.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes overlayExit {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-30%);
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes contentReveal {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="intro-overlay" aria-hidden="true">
+    <div class="intro-title">
+      <span class="intro-char">놀</span>
+      <span class="intro-char">아</span>
+      <span class="intro-char">볼</span>
+      <span class="intro-char">까?</span>
+    </div>
+  </div>
   <!-- 눈 내리는 효과 -->
   <div class="snowflake" style="left:10%; animation-duration:15s; animation-delay:0s;">❅</div>
   <div class="snowflake" style="left:20%; animation-duration:20s; animation-delay:2s;">❆</div>
