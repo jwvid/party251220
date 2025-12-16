@@ -65,34 +65,6 @@
       overflow-x: hidden;
     }
 
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-repeat: repeat;
-      opacity: 0.8;
-      mix-blend-mode: screen;
-    }
-
-    body::before {
-      background-image:
-        radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.85), transparent),
-        radial-gradient(1.4px 1.4px at 100px 80px, rgba(255, 255, 255, 0.75), transparent),
-        radial-gradient(1px 1px at 180px 20px, rgba(255, 255, 255, 0.7), transparent);
-      background-size: 180px 220px, 220px 200px, 200px 240px;
-      animation: snowFall 28s linear infinite;
-    }
-
-    body::after {
-      background-image:
-        radial-gradient(1.6px 1.6px at 60px 40px, rgba(255, 255, 255, 0.9), transparent),
-        radial-gradient(1.2px 1.2px at 140px 120px, rgba(255, 255, 255, 0.8), transparent);
-      background-size: 200px 260px, 240px 230px;
-      animation: snowDrift 34s linear infinite;
-    }
-
     .page {
       width: min(860px, 100%);
       display: flex;
@@ -262,24 +234,6 @@
       border: 0;
     }
 
-    @keyframes snowFall {
-      from {
-        transform: translateY(-20px);
-      }
-      to {
-        transform: translateY(30px);
-      }
-    }
-
-    @keyframes snowDrift {
-      from {
-        transform: translateY(-10px);
-      }
-      to {
-        transform: translateY(50px);
-      }
-    }
-
     @media (max-width: 520px) {
       body {
         padding: 22px 14px 32px;
@@ -324,9 +278,39 @@
     .info-card > *:nth-child(2) { animation-delay: 0.14s; }
     .info-card > *:nth-child(3) { animation-delay: 0.2s; }
     .info-card > *:nth-child(4) { animation-delay: 0.26s; }
+
+    /* Snowflakes */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1.5em;
+      opacity: 0.8;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- 눈 내리는 효과 -->
+  <div class="snowflake" style="left:10%; animation-duration:15s; animation-delay:0s;">❅</div>
+  <div class="snowflake" style="left:20%; animation-duration:20s; animation-delay:2s;">❆</div>
+  <div class="snowflake" style="left:30%; animation-duration:18s; animation-delay:4s;">❅</div>
+  <div class="snowflake" style="left:40%; animation-duration:22s; animation-delay:1s;">❆</div>
+  <div class="snowflake" style="left:50%; animation-duration:16s; animation-delay:6s;">❅</div>
+  <div class="snowflake" style="left:60%; animation-duration:19s; animation-delay:3s;">❆</div>
+  <div class="snowflake" style="left:70%; animation-duration:17s; animation-delay:5s;">❅</div>
+  <div class="snowflake" style="left:80%; animation-duration:21s; animation-delay:7s;">❆</div>
+  <div class="snowflake" style="left:90%; animation-duration:14s; animation-delay:8s;">❅</div>
+  <div class="snowflake" style="left:95%; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
     <section class="card hero">
       <span class="tagline">크리스마스 로맨틱 파티</span>
