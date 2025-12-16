@@ -238,9 +238,13 @@
       12% {
         opacity: 1;
       }
-      100% {
+      78% {
         opacity: 1;
         transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(1.05) rotate(var(--rot, 0deg));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(0) rotate(calc(var(--rot, 0deg) * 1.2));
       }
     }
 
@@ -461,7 +465,6 @@
 
     function launchConfetti(side = 'left', count = 14) {
       const startX = side === 'left' ? 4 : 96;
-      const dxBase = 42 + Math.random() * 14;
 
       for (let i = 0; i < count; i++) {
         const confetti = document.createElement('span');
@@ -469,12 +472,13 @@
         confetti.textContent = confettiTwemoji();
         const randomOffset = Math.random() * 6;
         confetti.style.left = `calc(${startX}vw ${side === 'left' ? '+' : '-'} ${randomOffset}vw)`;
-        confetti.style.setProperty('--dx', `${side === 'left' ? dxBase + Math.random() * 12 : -(dxBase + Math.random() * 12)}vw`);
-        confetti.style.setProperty('--dy', `${-34 - Math.random() * 16}vh`);
+        const { dx, dy } = computeConfettiVector(side);
+        confetti.style.setProperty('--dx', `${dx}vw`);
+        confetti.style.setProperty('--dy', `${dy}vh`);
         confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
 
         confetti.style.animationDelay = `${Math.random() * 0.35}s`;
-        confetti.style.animationDuration = `${1.2 + Math.random() * 0.5}s`;
+        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.75}s`;
 
         confetti.addEventListener('animationend', () => confetti.remove());
         document.body.appendChild(confetti);
@@ -485,15 +489,43 @@
       return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
     }
 
+    function computeConfettiVector(side = 'left') {
+      const baseDx = side === 'left' ? 50 + Math.random() * 12 : -(50 + Math.random() * 12);
+      const baseDy = -38 - Math.random() * 16;
+      const baseAngle = Math.atan2(baseDy, baseDx);
+      const spreadAngle = (Math.random() * 40 - 20) * (Math.PI / 180);
+      const magnitude = Math.hypot(baseDx, baseDy) * (0.92 + Math.random() * 0.16);
+      const finalAngle = baseAngle + spreadAngle;
+
+      return {
+        dx: parseFloat((Math.cos(finalAngle) * magnitude).toFixed(2)),
+        dy: parseFloat((Math.sin(finalAngle) * magnitude).toFixed(2)),
+      };
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.querySelector('.intro-overlay');
       if (!overlay) return;
 
-      overlay.addEventListener('animationend', (event) => {
-        if (event.animationName !== 'overlayExit') return;
+      const overlayStyles = getComputedStyle(overlay);
+      const duration = parseFloat(overlayStyles.animationDuration) || 0;
+      const delay = parseFloat(overlayStyles.animationDelay) || 0;
+      const leadTime = 1;
+      const scheduleMs = Math.max((delay + duration - leadTime) * 1000, 0);
 
+      let hasLaunched = false;
+      const triggerConfetti = () => {
+        if (hasLaunched) return;
+        hasLaunched = true;
         launchConfetti('left', 16);
         launchConfetti('right', 16);
+      };
+
+      setTimeout(triggerConfetti, scheduleMs);
+
+      overlay.addEventListener('animationend', (event) => {
+        if (event.animationName !== 'overlayExit') return;
+        triggerConfetti();
       });
     });
   </script>
