@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>놀아볼까?</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNotice';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Heavy.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    :root {
+      --berry: #b2004b;
+      --forest: #0f5132;
+      --rose: #ffe5ec;
+      --paper: #fff9f5;
+      --ink: #1f1a26;
+      --muted: #5f5368;
+      --border: #f1e4da;
+      --shadow: 0 14px 34px rgba(31, 26, 38, 0.08);
+      --entry-delay: 3.7s;
+      color-scheme: only light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(120% 120% at 15% 20%, #fff2f6 0%, #fef9f4 45%, #ffffff 100%);
+      font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      padding: 28px 18px 40px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: min(860px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      opacity: 0;
+      animation: contentReveal 0.6s ease forwards;
+      animation-delay: var(--entry-delay);
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 10px 8px 6px;
+    }
+
+    h1 {
+      font-family: 'SeoulNotice', 'Times New Roman', serif;
+      font-size: clamp(42px, 9vw, 70px);
+      color: var(--berry);
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: 1.4px;
+      text-shadow: 0 8px 20px rgba(178, 0, 75, 0.12);
+    }
+
+    .subhead {
+      margin: 0;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .visual {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      background: none;
+    }
+
+    .visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+    }
+
+    .info-card {
+      display: grid;
+      gap: 14px;
+      line-height: 1.6;
+    }
+
+    .info-main {
+      display: grid;
+      gap: 6px;
+    }
+
+    .info-main .title {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .info-main .note {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .schedule {
+      display: grid;
+      gap: 10px;
+    }
+
+    .schedule-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: linear-gradient(120deg, rgba(178, 0, 75, 0.06), rgba(255, 229, 236, 0.5));
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(31, 26, 38, 0.06);
+    }
+
+    .footer-address {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .map {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 12px;
+      line-height: 1.55;
+    }
+
+    .map .address-line {
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 15px;
+    }
+
+    .map .parking {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .map .parking a {
+      color: var(--berry);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .map .parking a:hover,
+    .map .parking a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 22px 14px 32px;
+      }
+
+      .card {
+        padding: 18px 16px;
+      }
+    }
+
+    /* Entrance animation */
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: riseIn 0.4s ease forwards;
+    }
+
+    .page > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0s); }
+    .page > *:nth-child(2) { animation-delay: calc(var(--entry-delay) + 0.08s); }
+    .page > *:nth-child(3) { animation-delay: calc(var(--entry-delay) + 0.16s); }
+    .page > *:nth-child(4) { animation-delay: calc(var(--entry-delay) + 0.24s); }
+
+    .card > * {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: riseIn 0.4s ease forwards;
+      animation-delay: calc(var(--entry-delay) + 0.08s);
+    }
+
+    .info-card > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0.08s); }
+    .info-card > *:nth-child(2) { animation-delay: calc(var(--entry-delay) + 0.14s); }
+    .info-card > *:nth-child(3) { animation-delay: calc(var(--entry-delay) + 0.2s); }
+    .info-card > *:nth-child(4) { animation-delay: calc(var(--entry-delay) + 0.26s); }
+
+    /* Snowflakes */
+    .snowflake {
+      position: fixed;
+      top: -12px;
+      color: #fff;
+      font-size: 1.5em;
+      opacity: 0;
+      animation: fall linear infinite;
+      animation-fill-mode: both;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(0.6px) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+      visibility: hidden;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 0;
+        transform: translate3d(var(--start-offset, 0px), -18px, 0) rotate(0deg);
+        visibility: hidden;
+      }
+      8% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      14% {
+        opacity: 0.9;
+        visibility: visible;
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(calc(var(--start-offset, 0px) + var(--drift, 0px)), 100vh, 0);
+        visibility: visible;
+      }
+    }
+
+    /* Intro overlay */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: overlayExit 0.7s ease forwards;
+      animation-delay: 3s;
+      pointer-events: none;
+    }
+
+    .intro-title {
+      display: inline-flex;
+      gap: 6px;
+      font-family: 'SeoulNotice', 'Times New Roman', serif;
+      font-size: clamp(44px, 9vw, 76px);
+      color: var(--berry);
+      letter-spacing: 2px;
+      font-weight: 900;
+    }
+
+    .intro-char {
+      opacity: 0;
+      transform: translateY(10px) scale(2.4) rotate(var(--start-rot, 0deg));
+      animation: introChar 0.9s cubic-bezier(0.22, 0.62, 0.24, 0.99) forwards;
+    }
+
+    .intro-char:nth-child(1) { animation-delay: 0s; --start-rot: -9deg; }
+    .intro-char:nth-child(2) { animation-delay: 0.3s; --start-rot: 8deg; }
+    .intro-char:nth-child(3) { animation-delay: 0.6s; --start-rot: -6deg; }
+    .intro-char:nth-child(4) { animation-delay: 0.9s; --start-rot: 10deg; }
+
+    @keyframes introChar {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(2.8) rotate(var(--start-rot, 0deg));
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes overlayExit {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-30%);
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes contentReveal {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-overlay" aria-hidden="true">
+    <div class="intro-title">
+      <span class="intro-char">놀</span>
+      <span class="intro-char">아</span>
+      <span class="intro-char">볼</span>
+      <span class="intro-char">까?</span>
+    </div>
+  </div>
+  <!-- 눈 내리는 효과 -->
+  <div class="snowflake" style="left:10%; --drift:-12px; animation-duration:15s; animation-delay:0s;">❅</div>
+  <div class="snowflake" style="left:20%; --drift:6px; animation-duration:20s; animation-delay:2s;">❆</div>
+  <div class="snowflake" style="left:30%; --drift:-8px; animation-duration:18s; animation-delay:4s;">❅</div>
+  <div class="snowflake" style="left:40%; --drift:5px; animation-duration:22s; animation-delay:1s;">❆</div>
+  <div class="snowflake" style="left:50%; --drift:-6px; animation-duration:16s; animation-delay:6s;">❅</div>
+  <div class="snowflake" style="left:60%; --drift:7px; animation-duration:19s; animation-delay:3s;">❆</div>
+  <div class="snowflake" style="left:70%; --drift:-4px; animation-duration:17s; animation-delay:5s;">❅</div>
+  <div class="snowflake" style="left:80%; --drift:9px; animation-duration:21s; animation-delay:7s;">❆</div>
+  <div class="snowflake" style="left:90%; --drift:-10px; animation-duration:14s; animation-delay:8s;">❅</div>
+  <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
+  <main class="page" aria-labelledby="page-title">
+    <section class="card hero">
+      <h1 id="page-title">놀아볼까?</h1>
+      <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
+    </section>
+
+    <section class="visual" aria-label="파티 미리보기 사진">
+      <img src="https://images.unsplash.com/photo-1518426488470-038b462a9cbd?auto=format&fit=crop&w=1400&q=80" alt="따뜻한 불빛이 감도는 로맨틱한 겨울 테이블 장식">
+    </section>
+
+    <section class="card info-card" aria-label="행사 정보">
+      <div class="info-main">
+        <div class="title">2025년 12월 20일 토요일 · 오후 6시 ~ 11시</div>
+        <div class="note">* 식사가 제공됩니다.</div>
+      </div>
+
+      <div class="schedule" aria-label="식순">
+        <div class="schedule-item">Welcome Toast · 18:00 — 포근한 첫 잔과 함께 인사</div>
+        <div class="schedule-item">Dinner &amp; Dance · 19:00 — 재즈와 함께하는 만찬</div>
+        <div class="schedule-item">Late Night Wishes · 21:30 — 케이크 커팅 &amp; 연말 소원</div>
+      </div>
+
+      <div class="footer-address">
+        재즈257 · 인천 송도동 로맨틱 재즈 라운지<br>
+        지하철 송도역 3번 출구 도보 5분 · 주차 가능
+      </div>
+    </section>
+
+    <section class="card map" aria-label="재즈257 위치 지도">
+      <div class="address-line">인천 연수구 인천타워대로 257 아트포레 D동 201호 202호</div>
+      <iframe
+        src="https://www.google.com/maps?q=%EC%9E%AC%EC%A6%88257&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="재즈257 구글 지도">
+      </iframe>
+      <div class="parking">
+        주차장 안내 : 재즈257이 위치한 아트포레 상가동 지하주차장을 이용하셔도 되고 (무료 4시간)
+        인근 공터(<a href="https://naver.me/5ZJXL9va" target="_blank" rel="noreferrer noopener">링크</a>) 무제한 주차 가능합니다.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
