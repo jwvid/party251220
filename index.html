@@ -36,69 +36,6 @@
       font-display: swap;
     }
 
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
-      font-weight: 100;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
-      font-weight: 200;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
-      font-weight: 300;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
-      font-weight: 500;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
-      font-weight: 600;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
-      font-weight: 700;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
-      font-weight: 800;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Pretendard';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
-      font-weight: 900;
-      font-display: swap;
-    }
-
     :root {
       --berry: #b2004b;
       --forest: #0f5132;
@@ -124,6 +61,36 @@
       display: flex;
       justify-content: center;
       padding: 28px 18px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-repeat: repeat;
+      opacity: 0.8;
+      mix-blend-mode: screen;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.85), transparent),
+        radial-gradient(1.4px 1.4px at 100px 80px, rgba(255, 255, 255, 0.75), transparent),
+        radial-gradient(1px 1px at 180px 20px, rgba(255, 255, 255, 0.7), transparent);
+      background-size: 180px 220px, 220px 200px, 200px 240px;
+      animation: snowFall 28s linear infinite;
+    }
+
+    body::after {
+      background-image:
+        radial-gradient(1.6px 1.6px at 60px 40px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1.2px 1.2px at 140px 120px, rgba(255, 255, 255, 0.8), transparent);
+      background-size: 200px 260px, 240px 230px;
+      animation: snowDrift 34s linear infinite;
     }
 
     .page {
@@ -168,6 +135,7 @@
       font-family: 'SeoulNotice', 'Times New Roman', serif;
       font-size: clamp(42px, 9vw, 70px);
       color: var(--berry);
+      font-weight: 900;
       margin: 0;
       letter-spacing: 1.4px;
       text-shadow: 0 8px 20px rgba(178, 0, 75, 0.12);
@@ -267,6 +235,24 @@
       width: 100%;
       height: 320px;
       border: 0;
+    }
+
+    @keyframes snowFall {
+      from {
+        transform: translateY(-20px);
+      }
+      to {
+        transform: translateY(30px);
+      }
+    }
+
+    @keyframes snowDrift {
+      from {
+        transform: translateY(-10px);
+      }
+      to {
+        transform: translateY(50px);
+      }
     }
 
     @media (max-width: 520px) {
