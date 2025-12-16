@@ -237,7 +237,7 @@
       position: fixed;
       bottom: -12px;
       font-size: 28px;
-      animation: confettiFly 1.6s cubic-bezier(0.18, 0.72, 0.28, 0.98) forwards;
+      animation: confettiFly 1.4s cubic-bezier(0.08, 0.9, 0.18, 1) forwards;
       pointer-events: none;
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
       z-index: 12000;
@@ -302,7 +302,7 @@
     }
 
     .section-kicker {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.3px;
       color: var(--forest);
@@ -312,7 +312,7 @@
     }
 
     .parking-title {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       color: var(--forest);
       display: inline-flex;
@@ -452,7 +452,6 @@
   <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
     <h1 class="hero-title">놀아볼까?</h1>
-    <p class="subhead" style="text-align:center; margin-top:4px; margin-bottom:4px; font-size:15.5px;">하지원&변아현의 연말파티 겸 결혼 피로연 파티에 초대합니다!</p>
     <section class="card hero visually-hidden">
       <h1 id="page-title">놀아볼까?</h1>
       <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
@@ -510,7 +509,7 @@
         const confetti = document.createElement('span');
         confetti.className = 'confetti';
         confetti.textContent = confettiTwemoji();
-        const randomOffset = Math.random() * 14;
+        const randomOffset = Math.random() * 10;
         confetti.style.left = `calc(${startX}vw ${side === 'left' ? '+' : '-'} ${randomOffset}vw)`;
         const { dx, dy } = computeConfettiVector(side);
         confetti.style.setProperty('--dx', `${dx}vw`);
@@ -518,7 +517,7 @@
         confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
 
         confetti.style.animationDelay = `${Math.random() * 0.35}s`;
-        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.95}s`;
+        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 0.75}s`;
 
         confetti.addEventListener('animationend', () => confetti.remove());
         document.body.appendChild(confetti);
@@ -530,11 +529,11 @@
     }
 
     function computeConfettiVector(side = 'left') {
-      const baseDx = side === 'left' ? 62 + Math.random() * 20 : -(62 + Math.random() * 20);
-      const baseDy = -50 - Math.random() * 22;
+      const baseDx = side === 'left' ? 50 + Math.random() * 12 : -(50 + Math.random() * 12);
+      const baseDy = -38 - Math.random() * 16;
       const baseAngle = Math.atan2(baseDy, baseDx);
-      const spreadAngle = (Math.random() * 100 - 50) * (Math.PI / 180);
-      const magnitude = Math.hypot(baseDx, baseDy) * (0.96 + Math.random() * 0.24);
+      const spreadAngle = (Math.random() * 40 - 20) * (Math.PI / 180);
+      const magnitude = Math.hypot(baseDx, baseDy) * (0.92 + Math.random() * 0.16);
       const finalAngle = baseAngle + spreadAngle;
 
       return {
