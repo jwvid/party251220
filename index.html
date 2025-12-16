@@ -208,6 +208,42 @@
       border: 0;
     }
 
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .confetti {
+      position: fixed;
+      bottom: -12px;
+      font-size: 28px;
+      animation: confettiFly 1.4s ease-out forwards;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+      z-index: 12000;
+    }
+
+    @keyframes confettiFly {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.8) rotate(0deg);
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(1.05) rotate(var(--rot, 0deg));
+      }
+    }
+
     @media (max-width: 520px) {
       body {
         padding: 22px 14px 32px;
@@ -378,13 +414,13 @@
   <div class="snowflake" style="left:90%; --drift:-10px; animation-duration:14s; animation-delay:8s;">❅</div>
   <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
-    <section class="card hero">
+    <section class="card hero visually-hidden">
       <h1 id="page-title">놀아볼까?</h1>
       <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
     </section>
 
     <section class="visual" aria-label="파티 미리보기 사진">
-      <img src="https://images.unsplash.com/photo-1518426488470-038b462a9cbd?auto=format&fit=crop&w=1400&q=80" alt="따뜻한 불빛이 감도는 로맨틱한 겨울 테이블 장식">
+      <img src="photo_cool.jpeg" alt="따뜻한 불빛이 감도는 로맨틱한 겨울 테이블 장식">
     </section>
 
     <section class="card info-card" aria-label="행사 정보">
@@ -420,5 +456,46 @@
       </div>
     </section>
   </main>
+  <script>
+    const confettiEmojis = ['🎉', '🎊', '✨', '😄', '😎', '🤣', '🎸', '🍕', '🥁', '🥳', '💫', '🎆'];
+
+    function launchConfetti(side = 'left', count = 14) {
+      const startX = side === 'left' ? 4 : 96;
+      const dxBase = 42 + Math.random() * 14;
+
+      for (let i = 0; i < count; i++) {
+        const confetti = document.createElement('span');
+        confetti.className = 'confetti';
+        confetti.textContent = confettiTwemoji();
+        const randomOffset = Math.random() * 6;
+        confetti.style.left = `calc(${startX}vw ${side === 'left' ? '+' : '-'} ${randomOffset}vw)`;
+        confetti.style.setProperty('--dx', `${side === 'left' ? dxBase + Math.random() * 12 : -(dxBase + Math.random() * 12)}vw`);
+        confetti.style.setProperty('--dy', `${-34 - Math.random() * 16}vh`);
+        confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
+
+        confetti.style.animationDelay = `${Math.random() * 0.35}s`;
+        confetti.style.animationDuration = `${1.2 + Math.random() * 0.5}s`;
+
+        confetti.addEventListener('animationend', () => confetti.remove());
+        document.body.appendChild(confetti);
+      }
+    }
+
+    function confettiTwemoji() {
+      return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.querySelector('.intro-overlay');
+      if (!overlay) return;
+
+      overlay.addEventListener('animationend', (event) => {
+        if (event.animationName !== 'overlayExit') return;
+
+        launchConfetti('left', 16);
+        launchConfetti('right', 16);
+      });
+    });
+  </script>
 </body>
 </html>
