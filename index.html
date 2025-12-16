@@ -285,7 +285,7 @@
       font-size: 16px;
       font-weight: 800;
       letter-spacing: 0.3px;
-      color: var(--forest);
+      color: var(--berry);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -303,7 +303,7 @@
 
     .info-card > *:nth-child(1) { animation-delay: calc(var(--entry-delay) + 0.08s); }
     .info-card > *:nth-child(2) { animation-delay: calc(var(--entry-delay) + 0.14s); }
-    .info-card > *:nth-child(3) { animation-delay: calc(var(--entry-delay) + 0.2s); }
+    .info-card > *:nth-child(3) { animation-delay: calc(var(---entry-delay) + 0.2s); }
     .info-card > *:nth-child(4) { animation-delay: calc(var(--entry-delay) + 0.26s); }
 
     /* Snowflakes */
@@ -432,14 +432,12 @@
   <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
     <h1 class="hero-title">놀아볼까?</h1>
-    <p class="subhead" style="text-align:center; margin-top:4px; margin-bottom:4px; font-size:17px;">하지원&변아현의 연말파티 겸 결혼 피로연 파티에 초대합니다!</p>
     <section class="card hero visually-hidden">
       <h1 id="page-title">놀아볼까?</h1>
-      <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
     </section>
 
     <section class="visual" aria-label="파티 미리보기 사진">
-      <img src="photo_cool.jpeg" alt="따뜻한 불빛이 감도는 로맨틱한 겨울 테이블 장식">
+      <img src="photo_cool.jpeg" alt="하줜과 아현의 파티 사진">
     </section>
 
     <section class="card info-card" aria-label="행사 정보">
@@ -455,10 +453,6 @@
         <div class="schedule-item">Late Night Wishes · 21:30 — 케이크 커팅 &amp; 연말 소원</div>
       </div>
 
-      <div class="footer-address">
-        재즈257 · 인천 송도동 로맨틱 재즈 라운지<br>
-        지하철 송도역 3번 출구 도보 5분 · 주차 가능
-      </div>
     </section>
 
     <section class="card map" aria-label="재즈257 위치 지도">
@@ -484,10 +478,12 @@
     const confettiEmojis = ['🎉', '🎊', '✨', '😄', '😎', '🤣', '🎸', '🍕', '🥁', '🥳', '💫', '🎆'];
 
     function launchConfetti(side = 'left', count = 14) {
-      const startXRatio = side === 'left' ? 0.1 : 0.9;
-      const startX = window.innerWidth * startXRatio;
+      const scale_factor = 1.1;
+      const startXRatio = side === 'left' ? 0 : 1;
+      const startX = window.innerWidth * startXRatio + (side === 'left' ? -40 : 40);
       const startY = window.innerHeight * 0.5;
-      const gravity = 0.3 + Math.random() * 0.2;
+      const base_gravity = 0.3 + Math.random() * 0.2;
+      const gravity = base_gravity / (scale_factor * scale_factor);
 
       for (let i = 0; i < count; i++) {
         const confetti = document.createElement('span');
@@ -502,19 +498,22 @@
         const maxAngle = 70 * Math.PI / 180;
         const ang = minAngle + Math.random() * (maxAngle - minAngle);
         const dir = side === 'left' ? 1 : -1;
-        const v = (8 + Math.random() * 6) * 1.2;
+        const base_v = (8 + Math.random() * 6) * 1.2;
+        const v = base_v / scale_factor;
         let vx = dir * v * Math.cos(ang);
         let vy = -v * Math.sin(ang);
 
         let rot = Math.random() * 360;
-        const rotV = (Math.random() - 0.5) * 12;
+        const base_rotV = (Math.random() - 0.5) * 12;
+        const rotV = base_rotV / scale_factor;
 
         confetti.style.left = `${posX}px`;
         confetti.style.top = `${posY}px`;
         confetti.style.transform = `rotate(${rot}deg) scale(1)`;
         confetti.style.opacity = 1;
 
-        const lifetime = 200 + Math.random() * 100;
+        const base_lifetime = 200 + Math.random() * 100;
+        const lifetime = base_lifetime * scale_factor;
         let currentTime = 0;
 
         const update = () => {
@@ -525,7 +524,7 @@
 
           confetti.style.left = `${posX}px`;
           confetti.style.top = `${posY}px`;
-          confetti.style.transform = `rotate(${rot}deg) scale(${1 + Math.sin(currentTime / 20) * 0.05})`;
+          confetti.style.transform = `rotate(${rot}deg) scale(${1 + Math.sin((currentTime / scale_factor) / 20) * 0.05})`;
 
           // Smoother fade out starting earlier
           if (currentTime > lifetime * 0.3) {
@@ -554,7 +553,7 @@
       const overlayStyles = getComputedStyle(overlay);
       const duration = parseFloat(overlayStyles.animationDuration) || 0;
       const delay = parseFloat(overlayStyles.animationDelay) || 0;
-      const leadTime = 1.5;
+      const leadTime = 2.5;
       const scheduleMs = Math.max((delay + duration - leadTime) * 1000, 0);
 
       let hasLaunched = false;
