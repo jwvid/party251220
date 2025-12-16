@@ -234,32 +234,11 @@
     }
 
     .confetti {
-      position: fixed;
-      bottom: -12px;
+      position: absolute;
       font-size: 28px;
-      animation: confettiFly 1.65s cubic-bezier(0.22, 0.68, 0.24, 0.98) forwards;
       pointer-events: none;
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
       z-index: 12000;
-    }
-
-    @keyframes confettiFly {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.84) rotate(0deg);
-      }
-      78% {
-        opacity: 1;
-        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(1.05) rotate(var(--rot, 0deg));
-      }
-      92% {
-        opacity: 0.8;
-        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(0.5) rotate(calc(var(--rot, 0deg) * 1.1));
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--dx, 0), var(--dy, -32vh)) scale(0) rotate(calc(var(--rot, 0deg) * 1.2));
-      }
     }
 
     @media (max-width: 520px) {
@@ -505,43 +484,67 @@
     const confettiEmojis = ['🎉', '🎊', '✨', '😄', '😎', '🤣', '🎸', '🍕', '🥁', '🥳', '💫', '🎆'];
 
     function launchConfetti(side = 'left', count = 14) {
-      const startX = side === 'left' ? 4 : 96;
+      const startXRatio = side === 'left' ? 0.1 : 0.9;
+      const startX = window.innerWidth * startXRatio;
+      const startY = window.innerHeight * 0.5;
+      const gravity = 0.3 + Math.random() * 0.2;
 
       for (let i = 0; i < count; i++) {
         const confetti = document.createElement('span');
         confetti.className = 'confetti';
-        confetti.textContent = confettiTwemoji();
-        const randomOffset = Math.random() * 16;
-        confetti.style.left = `calc(${startX}vw ${side === 'left' ? '+' : '-'} ${randomOffset}vw)`;
-        const { dx, dy } = computeConfettiVector(side);
-        confetti.style.setProperty('--dx', `${dx}vw`);
-        confetti.style.setProperty('--dy', `${dy}vh`);
-        confetti.style.setProperty('--rot', `${(Math.random() * 260 - 130).toFixed(1)}deg`);
-
-        confetti.style.animationDelay = `${Math.random() * 0.35}s`;
-        confetti.style.animationDuration = `${(1.2 + Math.random() * 0.5) * 1.0}s`;
-
-        confetti.addEventListener('animationend', () => confetti.remove());
+        confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
         document.body.appendChild(confetti);
+
+        let posX = startX;
+        let posY = startY;
+
+        const minAngle = 20 * Math.PI / 180;
+        const maxAngle = 70 * Math.PI / 180;
+        const ang = minAngle + Math.random() * (maxAngle - minAngle);
+        const dir = side === 'left' ? 1 : -1;
+        const v = (8 + Math.random() * 6) * 1.2;
+        let vx = dir * v * Math.cos(ang);
+        let vy = -v * Math.sin(ang);
+
+        let rot = Math.random() * 360;
+        const rotV = (Math.random() - 0.5) * 12;
+
+        confetti.style.left = `${posX}px`;
+        confetti.style.top = `${posY}px`;
+        confetti.style.transform = `rotate(${rot}deg) scale(1)`;
+        confetti.style.opacity = 1;
+
+        const lifetime = 200 + Math.random() * 100;
+        let currentTime = 0;
+
+        const update = () => {
+          posX += vx;
+          posY += vy;
+          vy += gravity;
+          rot += rotV;
+
+          confetti.style.left = `${posX}px`;
+          confetti.style.top = `${posY}px`;
+          confetti.style.transform = `rotate(${rot}deg) scale(${1 + Math.sin(currentTime / 20) * 0.05})`;
+
+          // Smoother fade out starting earlier
+          if (currentTime > lifetime * 0.3) {
+            const fadeFactor = (currentTime - lifetime * 0.3) / (lifetime * 0.7);
+            confetti.style.opacity = Math.max(1 - fadeFactor, 0);
+          }
+
+          currentTime++;
+
+          if (currentTime > lifetime || posY > window.innerHeight + 50 || confetti.style.opacity <= 0) {
+            confetti.remove();
+            return;
+          }
+
+          requestAnimationFrame(update);
+        };
+
+        update();
       }
-    }
-
-    function confettiTwemoji() {
-      return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
-    }
-
-    function computeConfettiVector(side = 'left') {
-      const baseDx = side === 'left' ? 68 + Math.random() * 22 : -(68 + Math.random() * 22);
-      const baseDy = -54 - Math.random() * 24;
-      const baseAngle = Math.atan2(baseDy, baseDx);
-      const spreadAngle = (Math.random() * 120 - 60) * (Math.PI / 180);
-      const magnitude = Math.hypot(baseDx, baseDy) * (0.98 + Math.random() * 0.24);
-      const finalAngle = baseAngle + spreadAngle;
-
-      return {
-        dx: parseFloat((Math.cos(finalAngle) * magnitude).toFixed(2)),
-        dy: parseFloat((Math.sin(finalAngle) * magnitude).toFixed(2)),
-      };
     }
 
     document.addEventListener('DOMContentLoaded', () => {
