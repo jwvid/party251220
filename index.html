@@ -62,7 +62,7 @@
       justify-content: center;
       padding: 28px 18px 40px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body::before,
@@ -229,6 +229,31 @@
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
+      display: grid;
+      gap: 12px;
+      line-height: 1.55;
+    }
+
+    .map .address-line {
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 15px;
+    }
+
+    .map .parking {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .map .parking a {
+      color: var(--berry);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .map .parking a:hover,
+    .map .parking a:focus-visible {
+      text-decoration: underline;
     }
 
     .map iframe {
@@ -298,13 +323,18 @@
     </section>
 
     <section class="card map" aria-label="재즈257 위치 지도">
+      <div class="address-line">인천 연수구 인천타워대로 257 아트포레 D동 201호 202호</div>
       <iframe
-        src="https://www.google.com/maps?q=%EC%9E%AC%EC%A6%88257%20%EC%86%A1%EB%8F%84&output=embed"
+        src="https://map.naver.com/v5/search/%EC%9E%AC%EC%A6%88257?c=14135311.242576,4500760.8652,16,0,0,0,dh"
         allowfullscreen
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="재즈257 지도">
+        title="재즈257 네이버 지도">
       </iframe>
+      <div class="parking">
+        주차장 안내 : 재즈257이 위치한 아트포레 상가동 지하주차장을 이용하셔도 되고 (무료 4시간)
+        인근 공터(<a href="https://naver.me/5ZJXL9va" target="_blank" rel="noreferrer noopener">링크</a>) 무제한 주차 가능합니다.
+      </div>
     </section>
   </main>
 </body>
