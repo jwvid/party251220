@@ -92,21 +92,6 @@
       padding: 10px 8px 6px;
     }
 
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(178, 0, 75, 0.08);
-      border: 1px solid rgba(178, 0, 75, 0.15);
-      color: var(--forest);
-      font-size: 14px;
-      letter-spacing: 0.4px;
-      font-weight: 600;
-    }
-
     h1 {
       font-family: 'SeoulNotice', 'Times New Roman', serif;
       font-size: clamp(42px, 9vw, 70px);
@@ -145,21 +130,6 @@
       display: grid;
       gap: 14px;
       line-height: 1.6;
-    }
-
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: rgba(15, 81, 50, 0.08);
-      border-radius: 999px;
-      color: var(--forest);
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.2px;
-      border: 1px solid rgba(15, 81, 50, 0.15);
-      width: fit-content;
     }
 
     .info-main {
@@ -286,7 +256,7 @@
     /* Snowflakes */
     .snowflake {
       position: fixed;
-      top: -10px;
+      top: -12px;
       color: #fff;
       font-size: 1.5em;
       opacity: 0;
@@ -294,20 +264,28 @@
       animation-fill-mode: both;
       pointer-events: none;
       z-index: 1;
-      filter: blur(0.4px) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+      filter: blur(0.6px) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+      visibility: hidden;
     }
 
     @keyframes fall {
       0% {
         opacity: 0;
-        transform: translate3d(0, -10px, 0);
+        transform: translate3d(var(--start-offset, 0px), -18px, 0) rotate(0deg);
+        visibility: hidden;
       }
       8% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      14% {
         opacity: 0.9;
+        visibility: visible;
       }
       100% {
         opacity: 1;
-        transform: translate3d(var(--drift, 0px), 100vh, 0);
+        transform: translate3d(calc(var(--start-offset, 0px) + var(--drift, 0px)), 100vh, 0);
+        visibility: visible;
       }
     }
 
@@ -332,27 +310,28 @@
       font-size: clamp(44px, 9vw, 76px);
       color: var(--berry);
       letter-spacing: 2px;
+      font-weight: 900;
     }
 
     .intro-char {
       opacity: 0;
       transform: translateY(10px) scale(2.4) rotate(var(--start-rot, 0deg));
-      animation: introChar 0.8s cubic-bezier(0.3, 0.85, 0.35, 1) forwards;
+      animation: introChar 0.9s cubic-bezier(0.22, 0.62, 0.24, 0.99) forwards;
     }
 
     .intro-char:nth-child(1) { animation-delay: 0s; --start-rot: -9deg; }
-    .intro-char:nth-child(2) { animation-delay: 0.3s; --start-rot: 6deg; }
-    .intro-char:nth-child(3) { animation-delay: 0.6s; --start-rot: -4deg; }
-    .intro-char:nth-child(4) { animation-delay: 0.9s; --start-rot: 8deg; }
+    .intro-char:nth-child(2) { animation-delay: 0.3s; --start-rot: 8deg; }
+    .intro-char:nth-child(3) { animation-delay: 0.6s; --start-rot: -6deg; }
+    .intro-char:nth-child(4) { animation-delay: 0.9s; --start-rot: 10deg; }
 
     @keyframes introChar {
       from {
         opacity: 0;
-        transform: translateY(10px) scale(2.8);
+        transform: translateY(10px) scale(2.8) rotate(var(--start-rot, 0deg));
       }
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1) rotate(0deg);
       }
     }
 
@@ -400,17 +379,15 @@
   <div class="snowflake" style="left:95%; --drift:11px; animation-duration:23s; animation-delay:9s;">❆</div>
   <main class="page" aria-labelledby="page-title">
     <section class="card hero">
-      <span class="tagline">크리스마스 로맨틱 파티</span>
       <h1 id="page-title">놀아볼까?</h1>
       <p class="subhead">연말, 그리고 우리의 결혼식 피로연을 함께 축하해요.<br>따뜻한 빛과 재즈가 흐르는 밤에 초대합니다.</p>
     </section>
 
     <section class="visual" aria-label="파티 미리보기 사진">
-      <img src="./photo-1765651998297-c5f862ac0a53.avif" alt="촛불과 장식으로 꾸민 겨울 파티 테이블">
+      <img src="https://images.unsplash.com/photo-1518426488470-038b462a9cbd?auto=format&fit=crop&w=1400&q=80" alt="따뜻한 불빛이 감도는 로맨틱한 겨울 테이블 장식">
     </section>
 
     <section class="card info-card" aria-label="행사 정보">
-      <span class="label">When &amp; Where</span>
       <div class="info-main">
         <div class="title">2025년 12월 20일 토요일 · 오후 6시 ~ 11시</div>
         <div class="note">* 식사가 제공됩니다.</div>
