@@ -196,6 +196,16 @@
       font-weight: 800;
       color: #000000;
       font-size: 13.5px;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(15, 81, 50, 0.2);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .map .map-button:hover,
+    .map .map-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(15, 81, 50, 0.28);
+      background: #0a3c25;
     }
 
     .map .map-button {
@@ -220,6 +230,29 @@
       transform: translateY(-1px);
       box-shadow: 0 14px 24px rgba(15, 81, 50, 0.28);
       background: #0a3c25;
+    }
+
+    .map .video-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #f07f2e;
+      color: #ffffff;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13.5px;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(240, 127, 46, 0.2);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .map .video-button:hover,
+    .map .video-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(240, 127, 46, 0.28);
+      background: #d96f1e;
     }
 
     .map .parking {
@@ -485,6 +518,7 @@
       <div class="section-kicker">📍 오시는 길 및 주차 안내</div>
       <div class="address-line">인천 연수구 인천타워대로 257 아트포레 D동 201호 202호</div>
       <a class="map-button" href="https://naver.me/GipB1oId" target="_blank" rel="noreferrer noopener">네이버 지도에서 보기</a>
+      <a class="video-button" href="https://www.instagram.com/reel/DROj9VID-hk/" target="_blank" rel="noreferrer noopener">오는 방법 동영상(재즈257 제공)</a>
       <iframe
         src="https://www.google.com/maps?q=%EC%9E%AC%EC%A6%88257&output=embed"
         allowfullscreen
